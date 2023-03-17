@@ -9,7 +9,6 @@ public class Main {
             bt.push(Math.abs(rng.nextInt()) % 100);
         }
 
-        // comment
         bt.print();
     }
 }
