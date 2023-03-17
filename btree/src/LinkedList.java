@@ -14,5 +14,6 @@ class LLNode<T> {
 
     LLNode(T data) {
         this.data = data;
+        this.next = null;
     }
 }
