@@ -4,21 +4,24 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Random rng = new Random();
-        BinaryTree<Integer> btree = new BinaryTree<>();
+        LinkedList<Integer> ll = new LinkedList<>();
 
-        for (int i = 0; i < 10000000; i++) {
-            btree.push(Math.abs(rng.nextInt() % 1000000));
+        for (int i = 0; i < 10; i++) {
+            ll.push(rng.nextInt());
         }
 
-        btree.push(123);
+        ll.print();
+        System.out.println(ll.index(2));
 
-        Scanner sc = new Scanner(System.in);
-        sc.nextInt();
-        System.out.println("Binary tree created");
 
-        if (btree.contains(123)) {
-            System.out.println("Lo contiene");
-        } else System.out.println("No lo contiene");
-        sc.close();
+        for (int i = 0; i < 10; i++) {
+            ll.pop_back();
+
+        }
+        System.out.println("=".repeat(10));
+        ll.print();
+        System.out.println("=".repeat(10));
+
+
     }
 }

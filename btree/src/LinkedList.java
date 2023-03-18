@@ -10,19 +10,43 @@ public class LinkedList<T> {
     public void push(T val) {
         LLNode<T> newNode = new LLNode<>(val);
 
-        if (head == null){
+        if (head == null) {
             head = newNode;
             tail = head;
             return;
         }
 
-        LLNode<T> node = tail;
+        newNode.prev = tail;
+        tail.next = newNode;
 
-        while (node.next != null) {
-            node = node.next;
+        tail = tail.next;
+    }
+
+    public T pop_back() {
+        T val = tail.data;
+
+        if (head == tail) {
+            head = null;
+            tail = null;
+        } else {
+            tail = tail.prev;
+            tail.next = null;
         }
 
-        node.next = newNode;
+        return val;
+    }
+
+    public T index(int pos) {
+        int i = 0;
+        LLNode<T> node = head;
+
+        while (i < pos && node != null) {
+            node = node.next;
+            i++;
+        }
+
+        if (node == null) return null;
+        return node.data;
     }
 
     public void print() {
@@ -38,10 +62,12 @@ public class LinkedList<T> {
 
 class LLNode<T> {
     T data;
+    LLNode<T> prev;
     LLNode<T> next;
 
     LLNode(T data) {
         this.data = data;
+        this.prev = null;
         this.next = null;
     }
 }
