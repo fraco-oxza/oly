@@ -75,6 +75,7 @@ public class BinaryTree<T extends Comparable<T>> {
             // Root case
             if (node.prev == null) {
                 root = node.right;
+                root.prev = null;
                 return;
             }
 
@@ -92,6 +93,7 @@ public class BinaryTree<T extends Comparable<T>> {
             // Root case
             if (node.prev == null) {
                 root = node.left;
+                root.prev = null;
                 return;
             }
 
@@ -106,16 +108,18 @@ public class BinaryTree<T extends Comparable<T>> {
         }
 
         // Two children case
-        System.out.println("Two children case");
         BTNode<T> replace_node = node.right;
         if (replace_node.left == null) {
             replace_node.prev.right = replace_node.right;
-            if (replace_node.right != null) replace_node.right.prev = replace_node.prev;
+
         } else {
             while (replace_node.left != null) replace_node = replace_node.left;
 
+
             replace_node.prev.left = replace_node.right;
         }
+
+        if (replace_node.right != null) replace_node.right.prev = replace_node.prev;
         node.data = replace_node.data;
     }
 
@@ -135,6 +139,14 @@ public class BinaryTree<T extends Comparable<T>> {
         }
 
         return false;
+    }
+
+    public boolean isBalanced() {
+        return BTNode.isBalanced(root);
+    }
+
+    public int maxDeep() {
+        return BTNode.maxDeep(root);
     }
 
     public void print() {
@@ -177,5 +189,16 @@ class BTNode<T> {
         }
         return size(node.right) + size(node.left) + 1;
 
+    }
+
+    static <T> boolean isBalanced(BTNode<T> node) {
+        return true;
+
+    }
+
+    static <T> int maxDeep(BTNode<T> node) {
+        if (node == null) return 0;
+
+        return Math.max(maxDeep(node.right), maxDeep(node.left)) + 1;
     }
 }
