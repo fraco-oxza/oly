@@ -1,27 +1,50 @@
+import java.util.ArrayList;
 import java.util.Random;
-import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
         Random rng = new Random();
-        LinkedList<Integer> ll = new LinkedList<>();
+        BinaryTree<Integer> btree = new BinaryTree<>();
+        ArrayList<Integer> arr = new ArrayList<>();
 
-        for (int i = 0; i < 10; i++) {
-            ll.push(rng.nextInt());
+        for (int i = 0; i < 10; i++){
+            int num = rng.nextInt() % 50 + 50;
+            btree.push(num);
+            arr.add(num);
         }
 
-        ll.print();
-        System.out.println(ll.index(2));
+
+        System.out.println("Initialization Done");
+        System.out.println("Three in pre order:");
+        btree.print();
+        System.out.println("Testing...");
+        int i = 1_000;
+        while (i > 0) {
+            System.out.println("-".repeat(20));
+            System.out.println(btree.size());
+            btree.print();
+            Integer num = rng.nextInt() % 50 + 50;
+
+            btree.push(num);
+            arr.add(num);
 
 
-        for (int i = 0; i < 10; i++) {
-            ll.pop_back();
 
+            int indexToDelete = rng.nextInt(arr.size());
+            Integer numToDelete = arr.get(indexToDelete);
+
+            System.out.println("To add    : " + num);
+            System.out.println("To delete : " + numToDelete);
+
+            arr.remove(indexToDelete);
+            btree.delete(numToDelete);
+
+            System.out.println("-".repeat(20));
+
+            i--;
         }
-        System.out.println("=".repeat(10));
-        ll.print();
-        System.out.println("=".repeat(10));
-
-
+        System.out.println("Test ended");
+        System.out.println("Tree in pre order:");
+        btree.print();
     }
 }
